@@ -2,8 +2,6 @@
 
 import os
 
-
-
 import discord
 
 import sys
@@ -70,7 +68,7 @@ text = open_and_read_file(filenames)
 
 # Get a Markov chain
 chains = make_chains(text)
-
+bot_response = make_text(chains)
 
 client = discord.Client()
 
@@ -85,7 +83,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # TODO: replace this with your code
-
+    if message.content.startswith('hello'):
+        await message.channel.send(bot_response)
 
 client.run(os.environ['DISCORD_TOKEN'])
